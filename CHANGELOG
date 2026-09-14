@@ -1,0 +1,111 @@
+2/2/2026 {
+    12:31: Makefile, README, CHANGELOG, main.c created
+    12:45: created border, and path creation
+    17:52: generated region starting points and created growth function
+    21:10: added building placement
+}
+
+2/4/2026 {
+    20:12: Created generation.c and generation.h, Refactored generation function into the new files
+    20:22: Modified building placement method to allow a character parameter to decide the building type
+    20:33: Set up Makefile
+    21:12: Updated README
+}
+
+2/11/2026 {
+    11:01: Added a map Struct, and refactored generation to malloc space for the struct
+    12:10: Added Map *world to main, and made the main loop that takes user inputs
+    12:45: Map generation now checks for gates from bordering maps to have gates align.
+    15:11: Finally finished refactoring the gates and path creation method so they align.
+    15:30: Finished Fly Implimentation
+    18:53: Pokecenter and Pokemart odds by distance implimentation
+    19:21: Added input '.' as a dev mode to allow fly to unvisited locations
+    19:36: Added hard boundaries at the edge of world and removed gates on those maps
+    20:09: Updated README
+}
+
+2/25/2026 {
+    10:02: Added pathfinding.c, pathfinding.h, and constants.h
+    10:06: Removed constant variables from generation.h, added them to constants.h, and included constants.h in generation.h
+    11:03: Implimented the getCost method that returns the int value for each character type and tile type
+    12:01: Added the display distance table, and arranged it so that all collumns line up, and updated makefile
+    12:24: Display Hiker dist map and Rival dist map on every map load
+    12:50: Added Trainer Struct, and Trainer pc to track the location of the player character
+    13:07: Changed Map display to include @ at the location of the player instead of the symbol of the tile at that location
+    13:11: Changed Distance display to include @@ at the location of the play instead of 00
+    13:12: Finalized Makefile
+    13:28: Updated README
+}
+
+3/4/2026 {
+    10:05: Added enum classType as a variable type to determine how each trainer type will move, and added an int nextTurn to the trainer stuct
+    10:19: Removed current game loop, to make a new one with inputs that will be listed in the README
+    10:25: Player movements added, with verification on valid movements(ie: no moving into trees, bolders, or borders)
+    11:20: Sleep added between inputs ~2.5 seconds per map display, and added a turn count to disallowed movements
+    12:39: Added movement out-of-bounds at gate locations to trasport between maps
+    15:04: Added files queue.c and queue.h for the priority queue, and updated makefile
+    17:37: Alot of changes, added queue methods for a heap style priority queue, added NPC generation and persistence between maps
+    18:20: Finished Movement logic, I think
+    19:24: Got main game loop functioning
+    21:09: Put final touches onto the project 
+    21:13: Updated README
+}
+
+3/25/2026 {
+    10:08: Added Curses
+    10:16: Added Trainer Coloring and Terrain Coloring
+    10:35: Added a Game Clock System to set trainer movement on a set schedule
+    10:48: Changed Player inputs/movement to match the assignment document, and added q to quit
+    11:15: Added the placeholder text for building interactions
+    11:37: Added input to list all trainers in the area, and added a defeated flag
+    11:42: Added a placeholder for a battle, and trainers after a battle are marked as defeated and no longer move
+    11:50: Updated Makefile
+    11:59: Updated README
+}
+
+4/1/2026 {
+    10:16: Reduced load of main.c, by refactoring into ui.c and ui.h, and updated Makefile
+    10:34: Fixed Mapchanging bug that prevented player movement on map change
+    10:37: Made gates untravelable for NPCs
+    16:35: Ported all C files to C++ along with contents
+    17:12: Reimplimented the fly mechanic(no dev mode this time)
+    18:08: Updated Makefile and README
+}
+
+4/8/2026 {
+    09:48: Added new files parser.cpp and parser.h
+    11:17: Implimented parsing function to handle the expected csv files
+    12:03: Added command line arguments to decide what file to print
+    20:26: Updated Makefile and README
+}
+
+4/15/2026 {
+    10:09: Added pokemon.h and pokemon.cpp which holds the class and functions for individual pokemon
+    10:13: Added a party to trainers to hold their unique pokemon
+    10:25: Reworked Parser to store data in memory to be used later
+    11:12: Added individual pokemon generation
+    18:00: Added a function to fill trainer parties with pokemon
+    18:28: Updated battle placeholder to display the pokemon in the party
+    19:03: Added the Select Starter screen which is shown on launch
+    19:24: Added wild pokemon encounters in the tall grass
+    19:28: Updated README
+}
+
+4/22/2026 {
+    15:33: Added battle.h and battle.cpp as the main files for the battle system, and updated Makefile
+    15:37: Added current health to pokemon and updated the pokemon center to be able to set current health to full
+    15:52: Updated the battle UI, and breif damage simulation
+    16:58: Added full battle functionality with correct turn order and full damage calculations
+    17:24: Added items, and inventory counts, and added a bag option to the battle menu
+    17:34: Added item functionality in battle by pressing 2, and out of battle by pressing B
+    17:39: Pokemarts restock the users items to what they start as
+    17:45: Normalized movement to [w e r / a d / z x c]
+    17:57: Added Pokeball usage to catch wild pokemon
+    18:23: Battle no longer ends on user pokemon fainting, checks if user has others to use and allows swapping in
+    18:34: Added running from wild pokemon, this fails while fighting trainers
+    18:58: Allows the user to have 6 pokemon, and then catch another and replace one they previously had
+    19:11: Handless user whiting out(all pokemon fainting) by sending them back to the starting map and healing their pokemon
+    19:20: Updated README
+
+
+}

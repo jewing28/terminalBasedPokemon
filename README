@@ -1,0 +1,66 @@
+Assignment 1: Terrain Generation
+This is a straight forward terrain generation program, that starts by creating the 21x81 2d array. It then generates two paths, one going north to south, one going east to west. Next, it places the two 2x2 buildings adjacent to a randomly selected set of paths. After that it will find 11 empty cells and seed them with the different terrain types:
+    4 Clearings
+    4 Tall Grass
+    1 Water
+    1 Tree
+    1 Mountain
+It then repeatedly grows these seeds by allowing them to expand into nearby empty cells, with a priority listing found in generation.c. This repeats until now empty cells are found, or until 50 iterations, after which it will fill any empty cells with trees. It then outputs the entire array.
+
+Assignment 2: Map to Map Traversal
+This is the next level of the terrain generation. You start in the middle of a world on a grid of 401x401 maps, each with the generation created in assignment 1, with slight adjustments, such as the two buildings appearing at a rate of 1 / D, where D is the Manhattan Distance from Map (0,0). the gates all line up with each adjacent map. The controls are as follow:
+    n or N: Move to the map to the North
+    s or S: Move to the map to the South
+    e or E: Move to the map to the East
+    w or W: Move to the map to the West
+    q or Q: Quit
+    .     : enter "Dev" mode, currently only allows flight to any map
+    f_x*y : "f" can be upper or lowercase, the "_" must be and empty space (' '), and the * can be anycharacter, "x" and "y" can be any integer[-200, 200] i.e.: "f -167 92" would be a valid command assuming you've been to map (-167, 97) or have dev mode turned on
+The inputs only take the first letter(except f), so if the input is "No way!" you will go north, and the rest of the characters will be ignored. At the moment you must press the return key to give the inputs to the game.
+
+Assignment 3: Distance From Player
+This assignment simulates the time it would take for Hiker NPCs and Rival NPCs to get to the player character using a dijkstra algorithm to find the shortest path. The player location is randomly generated to a valid position when the map is loaded, and the dijkstra algorithm then uses this location to find the distance from this tile to everyother tile in the map for both Hiker and Rivals using their respective time per tile type:
+Hiker: {%(on border), ~, ^} = INF, {M, C} = 50, {%(internal), :} = 15, {., #} = 10
+Rival: {%, ~ ^} = INF, {M, C} = 50, {:} = 15, {., #} = 10
+After the map is generated and displayed, the program then displays the hiker distance map with a "@@" showing the tile that represents the player location, then followed by the rival distance map in the same format
+
+Assignment 4: Player and NPCs
+This assignemt adds player and NPC movement to the game. There is a heap based queue to determine movement order, and the character at the top of the queue is popped out, and makes it's move which adds to its nextTurn counter, and is then reinserted into the heap. On the players turn, the player will be prompted for their input with the following controls:
+    w or W: Move up
+    s or S: Move down
+    a or A: Move left
+    d or D: Move right
+    ctrl + C: End the program
+If the player tries to make a move that is not allowed their nextTurn count will increment, for example trying to move into the wall or another character. The default number of NPC is 20, but you may also put in an n number of NPCs with "./main --numtrainers n"
+
+Assignement 5: Curses
+This assignement builds upon the previous making the map display and edited rather than redisplayed every iteration
+The player movement and quit controls are exactly as the assignment says. The only thing I changed was "." instead of rest will try to interact with the buildings since the terminal was reading ">" as "SHIFT + ."
+Escape is used anytime a menu placeholder is open
+
+Assignment 6: C++ rebase
+This assignment is very simple, it simply rebased the code to be in C++ rather than C. The controls are the same as the last assignment, except a new input of "f" is allowed which will open the fly menu which prompts the user to type in two integers in the range of [-200,200] inclusive seperated by a space, unlike the original fly mechanic, I did not add reimpliment the "only able to fly to previously visited maps" stipulation, since that seems to have lost me a point on that assignment, so flying can be done to anywhere. This also has a persisting trainer movement schedule when areas are left an entered.
+
+Assignment 7: CSV file Parsing
+This assignment is a brief but important detour from our main project. It takes command line arguments for different database csv files, and instead of the main game it will display these files in an organized format.
+
+Assignment 8: Pokemon!
+This assignment added actual pokemon in their each of their uniqueness. First is the player can now choose a randomly generated starter pokemon when the program is first ran, this is chosen by pressing 1, 2, or 3. Random Trainers also have pokemon now, which are shown in the battle placeholder now. You can also see how many pokemon the trainer has and if they have more than 1 you can shuffle through them by pressing n/p, you still exit battles by pressing escape. Lastly, wild pokemon can be encountered in the tall grass (:), which similar to trainers you will be able to exit this placeholder by pressing escape. Shiny Pokemon, which are quite rare will be signified by their name being in yellow opposed to the typical white. I highly recommend running the program with the command "./main --numtrainers 2" just so it is easier to test the wild pokemon mechanic without constantly being stopped by trainers.
+
+Assignment 9: Battling and Overall Functionality
+This assignment we finally have a seemingly playable game with battles against wild pokemon and trainers, aswell as the ability to catch said wild pokemon. This version does have updated controls from prveious versions which can be seen as follows:
+    Q: quit
+    W: Move Up and Left
+    E: Move Up
+    R: Move Up and Right
+    A: Move Left
+    D: Move Right
+    Z: Move Down and Left
+    X: Move Down
+    C: Move Down and Right
+    F: Fly to (x, y)
+    . or >: Use building
+    1,2,3,4: Various Prompted Responses in menus
+    T: View trainers in area
+    B: Use Items outside of Battle
+Like the last version so you aren't swarmed by trainers I recommend running the program witht he command "./main --numtrainers 2". Since the early areas will be tougher to beat the trainers I have made the starters begin at level 5 giving the user an advantage over said trainers, though do be careful since every pokemon only has 2 moves you may get soft locked into a trainer battle
